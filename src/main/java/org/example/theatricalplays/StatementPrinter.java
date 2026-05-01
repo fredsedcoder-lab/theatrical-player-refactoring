@@ -12,16 +12,23 @@ public class StatementPrinter {
         var result = String.format("Statement for %s%n", invoice.customer);
 
         NumberFormat frmt = NumberFormat.getCurrencyInstance(Locale.US);
-
         for (var perf : invoice.performances) {
             var play = plays.get(perf.playID);
             // add volume credits
             volumeCredits += play.creditsFor(perf);
+        }
 
-            // print line for this order
-            result += String.format("  %s: %s (%s seats)%n", play.name, frmt.format(play.amountFor(perf) / 100), perf.audience);
+        for(var perf : invoice.performances) {
+            var play = plays.get(perf.playID);
             totalAmount += play.amountFor(perf);
         }
+
+        for(var perf : invoice.performances) {
+            var play = plays.get(perf.playID);
+            // print line for this order
+            result += String.format("  %s: %s (%s seats)%n", play.name, frmt.format(play.amountFor(perf) / 100), perf.audience);
+        }
+
         result += String.format("Amount owed is %s%n", frmt.format(totalAmount / 100));
         result += String.format("You earned %s credits%n", volumeCredits);
         return result;
