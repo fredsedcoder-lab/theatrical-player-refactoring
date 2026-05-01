@@ -21,8 +21,8 @@ public class StatementPrinter {
             if ("comedy".equals(play.type)) volumeCredits += Math.floor(perf.audience / 5);
 
             // print line for this order
-            result += String.format("  %s: %s (%s seats)%n", play.name, frmt.format(perf.amountFor(play) / 100), perf.audience);
-            totalAmount += perf.amountFor(play);
+            result += String.format("  %s: %s (%s seats)%n", play.name, frmt.format(play.amountFor(perf) / 100), perf.audience);
+            totalAmount += play.amountFor(perf);
         }
         result += String.format("Amount owed is %s%n", frmt.format(totalAmount / 100));
         result += String.format("You earned %s credits%n", volumeCredits);
