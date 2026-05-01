@@ -16,7 +16,7 @@ public class StatementPrinter {
         for (var perf : invoice.performances) {
             var play = plays.get(perf.playID);
             // add volume credits
-            volumeCredits += perf.creditsFor(play);
+            volumeCredits += play.creditsFor(perf);
 
             // print line for this order
             result += String.format("  %s: %s (%s seats)%n", play.name, frmt.format(play.amountFor(perf) / 100), perf.audience);

@@ -10,10 +10,4 @@ public class Performance {
         this.audience = audience;
     }
 
-    int creditsFor(Play play) {
-        var result = Math.max(audience - 30, 0);
-        // add extra credit for every ten comedy attendees
-        if ("comedy".equals(play.type)) result += Math.floor(audience / 5);
-        return result;
-    }
 }
