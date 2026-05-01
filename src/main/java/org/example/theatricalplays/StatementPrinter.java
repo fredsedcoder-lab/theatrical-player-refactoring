@@ -9,9 +9,7 @@ public class StatementPrinter {
     public String print(Invoice invoice, Map<String, Play> plays) {
         var totalAmount = 0;
         var volumeCredits = 0;
-        var result = String.format("Statement for %s%n", invoice.customer);
 
-        NumberFormat frmt = NumberFormat.getCurrencyInstance(Locale.US);
         for (var perf : invoice.performances) {
             var play = plays.get(perf.playID);
             // add volume credits
@@ -22,6 +20,10 @@ public class StatementPrinter {
             var play = plays.get(perf.playID);
             totalAmount += play.amountFor(perf);
         }
+
+        NumberFormat frmt = NumberFormat.getCurrencyInstance(Locale.US);
+
+        var result = String.format("Statement for %s%n", invoice.customer);
 
         for(var perf : invoice.performances) {
             var play = plays.get(perf.playID);
